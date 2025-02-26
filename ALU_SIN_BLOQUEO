@@ -1,0 +1,35 @@
+  op2 ope2(.A(X), .B(Y), .R(w[1]));
+  op3 ope3(.A(X), .R(w[2]));
+  op4 ope4(.A(X[15:0]), .B(Y[15:0]), .R(w[3]));
+  op5 ope5(.A(X), .B(Y), .R(w[4]));
+  op6 ope6(.A(X), .B(Y), .R(w[5]));
+  always @(posedge clk) begin
+    case (s)
+	  3'd0: begin
+	    r <= w[0];
+	  end 
+	  3'd1: begin
+	    r <= w[1];
+	  end 
+	  3'd2: begin
+	    r <= w[2];
+	  end 
+	  3'd3: begin
+	    r <= w[3];
+	  end 
+	  3'd4: begin
+	    r <= w[4];
+	  end 
+	  3'd5: begin
+	    r <= w[5];
+	  end  
+	endcase
+	if(r==0) Zflag=1;
+	else Zflag=0;
+  end
+endmodule
+
+module ALU_TB();
+  reg  [31:0]X_TB, Y_TB;
+  reg  [2:0] s_TB;
+  wire [31:0]r_TB_B,
